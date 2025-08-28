@@ -6,202 +6,193 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
-      height: 100vh;
-      background: linear-gradient(135deg, #4b0082, #800080, #9932cc);
-      background-attachment: fixed;
-      background-size: cover;
+      background: linear-gradient(135deg, #4b0082, #8a2be2);
       color: white;
-      overflow-x: hidden;
-    }
-
-    main {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      overflow: hidden;
     }
 
     .slide {
       display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
       height: 100vh;
-      width: 100%;
-      box-sizing: border-box;
+      padding: 40px;
+      text-align: center;
+      animation: fadeIn 0.8s;
     }
 
-    input[type="radio"] {
-      display: none;
-    }
-
-    #step1:checked ~ .slides .slide1,
-    #step2:checked ~ .slides .slide2,
-    #step3:checked ~ .slides .slide3,
-    #step4:checked ~ .slides .slide4,
-    #step4a:checked ~ .slides .slide4a,
-    #step4b:checked ~ .slides .slide4b,
-    #step4c:checked ~ .slides .slide4c {
-      display: flex;
-      animation: fade 0.7s ease-in-out;
-    }
-
-    @keyframes fade {
-      from {opacity: 0;}
-      to {opacity: 1;}
+    .active {
+      display: block;
     }
 
     h1, h2 {
-      margin: 10px 0;
+      margin-bottom: 20px;
     }
 
     p {
-      max-width: 600px;
+      max-width: 800px;
+      margin: 0 auto 20px;
       line-height: 1.6;
     }
 
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .controls {
-      margin-top: 20px;
-    }
-
     .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
       background: white;
-      color: purple;
-      padding: 10px 20px;
-      margin: 5px;
+      color: #4b0082;
       border-radius: 6px;
       cursor: pointer;
-      display: inline-block;
       font-weight: bold;
       text-decoration: none;
     }
 
-    .btn.ghost {
-      background: transparent;
+    .btn:hover {
+      background: #ddd;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
       color: white;
-      border: 2px solid white;
+      text-align: center;
+      padding-top: 100px;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: #4b0082;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .popup h3 {
+      margin-bottom: 15px;
+    }
+
+    .popup p {
+      text-align: left;
+      white-space: pre-line;
     }
   </style>
 </head>
 <body>
-  <!-- Радио кнопки для управления слайдами -->
-  <input type="radio" name="step" id="step1" checked>
-  <input type="radio" name="step" id="step2">
-  <input type="radio" name="step" id="step3">
-  <input type="radio" name="step" id="step4">
-  <input type="radio" name="step" id="step4a">
-  <input type="radio" name="step" id="step4b">
-  <input type="radio" name="step" id="step4c">
+  <!-- СЛАЙД 1 -->
+  <div class="slide active" id="slide1">
+    <h1>Добро пожаловать</h1>
+    <p>Нажмите «Далее», чтобы открыть приветствие и подробности.</p>
+    <button class="btn" onclick="nextSlide(2)">Далее</button>
+  </div>
 
-  <main>
-    <section class="slides">
-      <!-- Слайд 1 -->
-      <div class="slide slide1">
-        <div class="logo">GUARD</div>
-        <h1>Добро пожаловать</h1>
-        <p>Нажмите «Далее», чтобы открыть приветствие и подробности.</p>
-        <div class="controls">
-          <label class="btn" for="step2">Далее</label>
-        </div>
-      </div>
+  <!-- СЛАЙД 2 -->
+  <div class="slide" id="slide2">
+    <h2>Вас приветствует команда GUARD</h2>
+    <p>
+      Мы рады вас заново видеть в наших рядах. Нашему проекту уже <strong>3 года</strong>. 
+      За это время мы закрыли множество каналов, негативно влиявших на сегмент, включая те, что были связаны со сливами.
+    </p>
+    <p>
+      Теперь пришло время передать вам знания, благодаря которым вы станете частью нашей команды.  
+      Для этого напишите нашему боту:  
+      <a href="https://t.me/guardbnbot" target="_blank" style="color: yellow;">t.me/guardbnbot</a>
+    </p>
+    <button class="btn" onclick="prevSlide(1)">Назад</button>
+    <button class="btn" onclick="nextSlide(3)">Далее</button>
+  </div>
 
-      <!-- Слайд 2 -->
-      <div class="slide slide2">
-        <div class="logo">GUARD</div>
-        <h2>Вас приветствует команда GUARD</h2>
-        <p>Мы рады вас заново видеть в наших рядах. Нашему проекту уже <strong>3 года</strong>. За это время мы закрыли множество каналов, негативно влиявших на сегмент, включая те, что были связаны со сливами.</p>
-        <p>Теперь пришло время передать вам знания, благодаря которым вы станете частью нашей команды. Для этого напишите нашему боту:
-          <a href="https://t.me/guardbnbot" target="_blank" rel="noopener noreferrer">t.me/guardbnbot</a>
-        </p>
-        <div class="controls" style="margin-top:40px;">
-          <label class="btn ghost" for="step1">Назад</label>
-          <label class="btn" for="step3">Далее</label>
-        </div>
-      </div>
+  <!-- СЛАЙД 3 -->
+  <div class="slide" id="slide3">
+    <h2>С радостью, команда GUARD</h2>
+    <p>Спасибо, что вы с нами. До встречи в чате бота!</p>
+    <button class="btn" onclick="prevSlide(2)">Назад</button>
+    <button class="btn" onclick="nextSlide(4)">Далее</button>
+  </div>
 
-      <!-- Слайд 3 -->
-      <div class="slide slide3">
-        <div class="logo">GUARD</div>
-        <h2>С радостью, команда GUARD</h2>
-        <p>Спасибо, что вы с нами. До встречи в чате бота!</p>
-        <div class="controls">
-          <label class="btn ghost" for="step2">Назад</label>
-          <label class="btn" for="step4">Далее</label>
-        </div>
-      </div>
+  <!-- СЛАЙД 4 -->
+  <div class="slide" id="slide4">
+    <h2>Work by GUARD</h2>
+    <button class="btn" onclick="openPopup('popup1')">Анти-армянский</button><br>
+    <button class="btn" onclick="openPopup('popup2')">Азарт</button><br>
+    <button class="btn" onclick="openPopup('popup3')">Шоп</button><br>
+    <button class="btn" onclick="prevSlide(3)">Назад</button>
+  </div>
 
-      <!-- Слайд 4 (три кнопки) -->
-      <div class="slide slide4">
-        <div class="logo">GUARD</div>
-        <h2>Work by GUARD</h2>
-        <div class="controls">
-          <label class="btn" for="step4a">Анти-армянский</label><br>
-          <label class="btn" for="step4b">Азарт</label><br>
-          <label class="btn" for="step4c">Шоп</label><br>
-          <label class="btn ghost" for="step3">Назад</label>
-        </div>
-      </div>
+  <!-- POPUP 1 -->
+  <div class="popup" id="popup1">
+    <div class="popup-content">
+      <h3>Work by GUARD</h3>
+      <p>
+андастирак - 4к
+ардар датавор - 12к
+аргишт апер - 18к
+позорище - 31к
+хай-слив - 2к
+азгаин - 700
+хайкакан сливнер - 3,5к
+армед - 1,7к
+нате приват - 1,9к
+немесис - 1,8к
+корданзвац - 200
+ереванян кянк - 9,1к
+эск ереван - 40к
+хандипум ереван - 17к
+ере 21+ - 7,3к
+      </p>
+      <button class="btn" onclick="closePopup('popup1')">Назад</button>
+    </div>
+  </div>
 
-      <!-- Слайд 4a -->
-      <div class="slide slide4a">
-        <h2>Work by GUARD</h2>
-        <p>
-          андастирак - 4к <br>
-          ардар датавор - 12к <br>
-          аргишт апер - 18к <br>
-          позорище - 31к <br>
-          хай-слив - 2к <br>
-          азгаин - 700 <br>
-          хайкакан сливнер - 3,5к <br>
-          армед - 1,7к <br>
-          нате приват - 1,9к <br>
-          немесис - 1,8к <br>
-          корданзвац - 200 <br>
-          ереванян кянк - 9,1к <br>
-          эск ереван - 40к <br>
-          хандипум ереван - 17к <br>
-          ере 21+ - 7,3к
-        </p>
-        <div class="controls">
-          <label class="btn ghost" for="step4">Назад</label>
-        </div>
-      </div>
+  <!-- POPUP 2 -->
+  <div class="popup" id="popup2">
+    <div class="popup-content">
+      <h3>Work by GUARD</h3>
+      <p>
+тото-гаминг - 11к
+аджарабет - 14к
+      </p>
+      <button class="btn" onclick="closePopup('popup2')">Назад</button>
+    </div>
+  </div>
 
-      <!-- Слайд 4b -->
-      <div class="slide slide4b">
-        <h2>Work by GUARD</h2>
-        <p>
-          тото-гаминг - 11к <br>
-          аджарабет - 14к
-        </p>
-        <div class="controls">
-          <label class="btn ghost" for="step4">Назад</label>
-        </div>
-      </div>
+  <!-- POPUP 3 -->
+  <div class="popup" id="popup3">
+    <div class="popup-content">
+      <h3>Work by GUARD</h3>
+      <p>
+сев шука - 11,3к
+кристал ам - 4,5к
+      </p>
+      <button class="btn" onclick="closePopup('popup3')">Назад</button>
+    </div>
+  </div>
 
-      <!-- Слайд 4c -->
-      <div class="slide slide4c">
-        <h2>Work by GUARD</h2>
-        <p>
-          сев шука - 11,3к <br>
-          кристал ам - 4,5к
-        </p>
-        <div class="controls">
-          <label class="btn ghost" for="step4">Назад</label>
-        </div>
-      </div>
-    </section>
-  </main>
+  <script>
+    function nextSlide(n) {
+      document.querySelector(".active").classList.remove("active");
+      document.getElementById("slide" + n).classList.add("active");
+    }
+
+    function prevSlide(n) {
+      document.querySelector(".active").classList.remove("active");
+      document.getElementById("slide" + n).classList.add("active");
+    }
+
+    function openPopup(id) {
+      document.getElementById(id).style.display = "block";
+    }
+
+    function closePopup(id) {
+      document.getElementById(id).style.display = "none";
+    }
+  </script>
 </body>
 </html>
