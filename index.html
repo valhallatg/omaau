@@ -1,36 +1,28 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GUARD</title>
+  <meta charset="UTF-8">
+  <title>GUARD Project</title>
   <style>
-    body, html {
+    body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      height: 100%;
-      overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(135deg, #4b0082, #800080, #9932cc);
+      background-attachment: fixed;
+      background-size: cover;
       color: white;
+      overflow-x: hidden;
     }
 
     main {
-      height: 100%;
-    }
-
-    section {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .slides {
-      position: relative;
       width: 100%;
-      height: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
     .slide {
@@ -38,10 +30,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100%;
       padding: 20px;
+      height: 100vh;
+      width: 100%;
       box-sizing: border-box;
-      animation: fadeIn 0.8s ease;
     }
 
     input[type="radio"] {
@@ -51,187 +43,165 @@
     #step1:checked ~ .slides .slide1,
     #step2:checked ~ .slides .slide2,
     #step3:checked ~ .slides .slide3,
-    #step4:checked ~ .slides .slide4 {
+    #step4:checked ~ .slides .slide4,
+    #step4a:checked ~ .slides .slide4a,
+    #step4b:checked ~ .slides .slide4b,
+    #step4c:checked ~ .slides .slide4c {
       display: flex;
+      animation: fade 0.7s ease-in-out;
+    }
+
+    @keyframes fade {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    h1, h2 {
+      margin: 10px 0;
+    }
+
+    p {
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .controls {
+      margin-top: 20px;
     }
 
     .btn {
-      background: #800080;
+      background: white;
+      color: purple;
       padding: 10px 20px;
-      margin: 10px;
+      margin: 5px;
       border-radius: 6px;
       cursor: pointer;
       display: inline-block;
       font-weight: bold;
+      text-decoration: none;
     }
 
-    .btn:hover {
-      background: #a020f0;
-    }
-
-    .ghost {
+    .btn.ghost {
       background: transparent;
-      border: 2px solid #fff;
-    }
-
-    .controls {
-      margin-top: 30px;
-    }
-
-    h1, h2, p {
-      margin-bottom: 20px;
-    }
-
-    /* фон */
-    body {
-      background: linear-gradient(rgba(128, 0, 128, 0.6), rgba(128, 0, 128, 0.6)),
-        url('70B908A0-67CE-4EC9-8381-B560F4592286.jpeg') no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    /* модальное окно */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
       color: white;
-      text-align: center;
-      padding-top: 100px;
-    }
-    .modal-content {
-      background: rgba(128,0,128,0.9);
-      padding: 20px;
-      margin: auto;
-      width: 80%;
-      max-width: 400px;
-      border-radius: 8px;
-    }
-    .modal button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #fff;
-      color: #800080;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .modal button:hover {
-      background: #ddd;
-    }
-
-    @keyframes fadeIn {
-      from {opacity:0;}
-      to {opacity:1;}
+      border: 2px solid white;
     }
   </style>
 </head>
 <body>
-  <!-- переключатели -->
+  <!-- Радио кнопки для управления слайдами -->
   <input type="radio" name="step" id="step1" checked>
   <input type="radio" name="step" id="step2">
   <input type="radio" name="step" id="step3">
   <input type="radio" name="step" id="step4">
+  <input type="radio" name="step" id="step4a">
+  <input type="radio" name="step" id="step4b">
+  <input type="radio" name="step" id="step4c">
 
   <main>
-    <section>
-      <div class="slides">
-        <!-- СЛАЙД 1 -->
-        <div class="slide slide1">
-          <h1>Добро пожаловать</h1>
-          <p>Нажмите «Далее», чтобы открыть приветствие и подробности.</p>
-          <div class="controls">
-            <label class="btn" for="step2">Далее</label>
-          </div>
+    <section class="slides">
+      <!-- Слайд 1 -->
+      <div class="slide slide1">
+        <div class="logo">GUARD</div>
+        <h1>Добро пожаловать</h1>
+        <p>Нажмите «Далее», чтобы открыть приветствие и подробности.</p>
+        <div class="controls">
+          <label class="btn" for="step2">Далее</label>
         </div>
+      </div>
 
-        <!-- СЛАЙД 2 -->
-        <div class="slide slide2">
-          <h2>Вас приветствует команда GUARD</h2>
-          <p>Мы рады вас видеть в наших рядах. Нашему проекту уже <strong>3 года</strong>.</p>
-          <p>Теперь пришло время передать вам знания. Для этого напишите нашему боту:
-            <a href="https://t.me/guardbnbot" target="_blank" style="color:white;">t.me/guardbnbot</a>
-          </p>
-          <div class="controls" style="margin-top:50px;">
-            <label class="btn ghost" for="step1">Назад</label>
-            <label class="btn" for="step3">Далее</label>
-          </div>
+      <!-- Слайд 2 -->
+      <div class="slide slide2">
+        <div class="logo">GUARD</div>
+        <h2>Вас приветствует команда GUARD</h2>
+        <p>Мы рады вас заново видеть в наших рядах. Нашему проекту уже <strong>3 года</strong>. За это время мы закрыли множество каналов, негативно влиявших на сегмент, включая те, что были связаны со сливами.</p>
+        <p>Теперь пришло время передать вам знания, благодаря которым вы станете частью нашей команды. Для этого напишите нашему боту:
+          <a href="https://t.me/guardbnbot" target="_blank" rel="noopener noreferrer">t.me/guardbnbot</a>
+        </p>
+        <div class="controls" style="margin-top:40px;">
+          <label class="btn ghost" for="step1">Назад</label>
+          <label class="btn" for="step3">Далее</label>
         </div>
+      </div>
 
-        <!-- СЛАЙД 3 -->
-        <div class="slide slide3">
-          <h2>С радостью, команда GUARD</h2>
-          <p>Спасибо, что вы с нами. До встречи в чате бота!</p>
-          <div class="controls">
-            <label class="btn ghost" for="step2">Назад</label>
-            <label class="btn" for="step4">Далее</label>
-          </div>
+      <!-- Слайд 3 -->
+      <div class="slide slide3">
+        <div class="logo">GUARD</div>
+        <h2>С радостью, команда GUARD</h2>
+        <p>Спасибо, что вы с нами. До встречи в чате бота!</p>
+        <div class="controls">
+          <label class="btn ghost" for="step2">Назад</label>
+          <label class="btn" for="step4">Далее</label>
         </div>
+      </div>
 
-        <!-- СЛАЙД 4 -->
-        <div class="slide slide4">
-          <h2>Work by GUARD</h2>
-          <div class="controls">
-            <div class="btn" onclick="openModal('anti')">Анти-армянский</div>
-            <div class="btn" onclick="openModal('azart')">Азарт</div>
-            <div class="btn" onclick="openModal('shop')">Шоп</div>
-            <label class="btn ghost" for="step3">Назад</label>
-          </div>
+      <!-- Слайд 4 (три кнопки) -->
+      <div class="slide slide4">
+        <div class="logo">GUARD</div>
+        <h2>Work by GUARD</h2>
+        <div class="controls">
+          <label class="btn" for="step4a">Анти-армянский</label><br>
+          <label class="btn" for="step4b">Азарт</label><br>
+          <label class="btn" for="step4c">Шоп</label><br>
+          <label class="btn ghost" for="step3">Назад</label>
+        </div>
+      </div>
+
+      <!-- Слайд 4a -->
+      <div class="slide slide4a">
+        <h2>Work by GUARD</h2>
+        <p>
+          андастирак - 4к <br>
+          ардар датавор - 12к <br>
+          аргишт апер - 18к <br>
+          позорище - 31к <br>
+          хай-слив - 2к <br>
+          азгаин - 700 <br>
+          хайкакан сливнер - 3,5к <br>
+          армед - 1,7к <br>
+          нате приват - 1,9к <br>
+          немесис - 1,8к <br>
+          корданзвац - 200 <br>
+          ереванян кянк - 9,1к <br>
+          эск ереван - 40к <br>
+          хандипум ереван - 17к <br>
+          ере 21+ - 7,3к
+        </p>
+        <div class="controls">
+          <label class="btn ghost" for="step4">Назад</label>
+        </div>
+      </div>
+
+      <!-- Слайд 4b -->
+      <div class="slide slide4b">
+        <h2>Work by GUARD</h2>
+        <p>
+          тото-гаминг - 11к <br>
+          аджарабет - 14к
+        </p>
+        <div class="controls">
+          <label class="btn ghost" for="step4">Назад</label>
+        </div>
+      </div>
+
+      <!-- Слайд 4c -->
+      <div class="slide slide4c">
+        <h2>Work by GUARD</h2>
+        <p>
+          сев шука - 11,3к <br>
+          кристал ам - 4,5к
+        </p>
+        <div class="controls">
+          <label class="btn ghost" for="step4">Назад</label>
         </div>
       </div>
     </section>
   </main>
-
-  <!-- МОДАЛКИ -->
-  <div id="modal-anti" class="modal">
-    <div class="modal-content">
-      <h3>Work by GUARD</h3>
-      <p>андастирак - 4к<br>
-      ардар датавор - 12к<br>
-      аргишт апер - 18к<br>
-      позорище - 31к<br>
-      хай-слив - 2к<br>
-      азгаин - 700<br>
-      хайкакан сливнер - 3,5к<br>
-      армед - 1,7к<br>
-      нате приват - 1,9к<br>
-      немесис - 1,8к<br>
-      корданзвац - 200<br>
-      ереванян кянк - 9,1к<br>
-      еск ереван - 40к<br>
-      хандипум ереван - 17к<br>
-      ере 21+ - 7,3к</p>
-      <button onclick="closeModal('anti')">Назад</button>
-    </div>
-  </div>
-
-  <div id="modal-azart" class="modal">
-    <div class="modal-content">
-      <h3>Work by GUARD</h3>
-      <p>тото-гаминг - 11к<br>
-      аджарабет - 14к</p>
-      <button onclick="closeModal('azart')">Назад</button>
-    </div>
-  </div>
-
-  <div id="modal-shop" class="modal">
-    <div class="modal-content">
-      <h3>Work by GUARD</h3>
-      <p>сев шука - 11,3к<br>
-      кристал ам - 4,5к</p>
-      <button onclick="closeModal('shop')">Назад</button>
-    </div>
-  </div>
-
-  <script>
-    function openModal(name) {
-      document.getElementById('modal-' + name).style.display = 'block';
-    }
-    function closeModal(name) {
-      document.getElementById('modal-' + name).style.display = 'none';
-    }
-  </script>
 </body>
 </html>
