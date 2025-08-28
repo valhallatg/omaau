@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GUARD</title>
   <style>
-    body {
+    body, html {
       margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
+      height: 100%;
+      overflow: hidden;
       color: white;
-      background: url('70B908A0-67CE-4EC9-8381-B560F4592286.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      overflow-x: hidden;
+    }
+
+    main {
+      height: 100%;
+    }
+
+    section {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
 
     .slide {
       display: none;
-      height: 100vh;
-      width: 100%;
-      text-align: center;
-      padding: 40px 20px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 20px;
       box-sizing: border-box;
+      animation: fadeIn 0.8s ease;
     }
 
     input[type="radio"] {
@@ -30,186 +51,187 @@
     #step1:checked ~ .slides .slide1,
     #step2:checked ~ .slides .slide2,
     #step3:checked ~ .slides .slide3,
-    #step4:checked ~ .slides .slide4,
-    #anti:checked ~ .slides .anti,
-    #azart:checked ~ .slides .azart,
-    #shop:checked ~ .slides .shop {
-      display: block;
-      animation: fadeIn 0.6s ease-in-out;
+    #step4:checked ~ .slides .slide4 {
+      display: flex;
     }
 
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    h1, h2 {
-      margin-bottom: 20px;
-      color: #fff;
-      text-shadow: 0 0 10px #7d2ae8;
-    }
-
-    .logo {
-      font-size: 36px;
+    .btn {
+      background: #800080;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-block;
       font-weight: bold;
-      margin-bottom: 20px;
-      text-shadow: 0 0 20px #7d2ae8;
+    }
+
+    .btn:hover {
+      background: #a020f0;
+    }
+
+    .ghost {
+      background: transparent;
+      border: 2px solid #fff;
     }
 
     .controls {
       margin-top: 30px;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 12px 24px;
-      margin: 5px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #fff;
-      background: #7d2ae8;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s ease;
+    h1, h2, p {
+      margin-bottom: 20px;
     }
 
-    .btn:hover {
-      background: #a855f7;
+    /* фон */
+    body {
+      background: linear-gradient(rgba(128, 0, 128, 0.6), rgba(128, 0, 128, 0.6)),
+        url('70B908A0-67CE-4EC9-8381-B560F4592286.jpeg') no-repeat center center fixed;
+      background-size: cover;
     }
 
-    .btn.ghost {
-      background: transparent;
-      border: 2px solid #fff;
-      color: #fff;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
+    /* модальное окно */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      color: white;
       text-align: center;
+      padding-top: 100px;
+    }
+    .modal-content {
+      background: rgba(128,0,128,0.9);
+      padding: 20px;
+      margin: auto;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 8px;
+    }
+    .modal button {
       margin-top: 20px;
+      padding: 10px 20px;
+      background: #fff;
+      color: #800080;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .modal button:hover {
+      background: #ddd;
     }
 
-    ul li {
-      margin: 6px 0;
-      font-size: 18px;
+    @keyframes fadeIn {
+      from {opacity:0;}
+      to {opacity:1;}
     }
   </style>
 </head>
 <body>
-  <!-- Радиокнопки для переключения -->
-  <input type="radio" id="step1" name="slider" checked>
-  <input type="radio" id="step2" name="slider">
-  <input type="radio" id="step3" name="slider">
-  <input type="radio" id="step4" name="slider">
-
-  <input type="radio" id="anti" name="slider">
-  <input type="radio" id="azart" name="slider">
-  <input type="radio" id="shop" name="slider">
+  <!-- переключатели -->
+  <input type="radio" name="step" id="step1" checked>
+  <input type="radio" name="step" id="step2">
+  <input type="radio" name="step" id="step3">
+  <input type="radio" name="step" id="step4">
 
   <main>
-    <section class="slides">
-      <!-- СЛАЙД 1 -->
-      <div class="slide slide1">
-        <div class="logo">GUARD</div>
-        <h1>Добро пожаловать</h1>
-        <p>Нажмите «Далее», чтобы открыть приветствие и подробности.</p>
-        <div class="controls">
-          <label class="btn" for="step2">Далее</label>
+    <section>
+      <div class="slides">
+        <!-- СЛАЙД 1 -->
+        <div class="slide slide1">
+          <h1>Добро пожаловать</h1>
+          <p>Нажмите «Далее», чтобы открыть приветствие и подробности.</p>
+          <div class="controls">
+            <label class="btn" for="step2">Далее</label>
+          </div>
         </div>
-      </div>
 
-      <!-- СЛАЙД 2 -->
-      <div class="slide slide2">
-        <div class="logo">GUARD</div>
-        <h2>Вас приветствует команда GUARD</h2>
-        <p>Мы рады вас заново видеть в наших рядах. Нашему проекту уже <strong>3 года</strong>. За это время мы закрыли множество каналов, негативно влиявших на сегмент, включая те, что были связаны со сливами.</p>
-        <p>Теперь пришло время передать вам знания, благодаря которым вы станете частью нашей команды. Для этого напишите нашему боту:
-          <a href="https://t.me/guardbnbot" target="_blank">t.me/guardbnbot</a>
-        </p>
-        <div class="controls">
-          <label class="btn ghost" for="step1">Назад</label>
-          <label class="btn" for="step3">Далее</label>
+        <!-- СЛАЙД 2 -->
+        <div class="slide slide2">
+          <h2>Вас приветствует команда GUARD</h2>
+          <p>Мы рады вас видеть в наших рядах. Нашему проекту уже <strong>3 года</strong>.</p>
+          <p>Теперь пришло время передать вам знания. Для этого напишите нашему боту:
+            <a href="https://t.me/guardbnbot" target="_blank" style="color:white;">t.me/guardbnbot</a>
+          </p>
+          <div class="controls" style="margin-top:50px;">
+            <label class="btn ghost" for="step1">Назад</label>
+            <label class="btn" for="step3">Далее</label>
+          </div>
         </div>
-      </div>
 
-      <!-- СЛАЙД 3 -->
-      <div class="slide slide3">
-        <div class="logo">GUARD</div>
-        <h2>С радостью, команда GUARD</h2>
-        <p>Спасибо, что вы с нами. До встречи в чате бота!</p>
-        <div class="controls">
-          <label class="btn ghost" for="step2">Назад</label>
-          <a class="btn" href="https://t.me/guardbnbot" target="_blank">Написать боту</a>
-          <label class="btn" for="step4">Далее</label>
+        <!-- СЛАЙД 3 -->
+        <div class="slide slide3">
+          <h2>С радостью, команда GUARD</h2>
+          <p>Спасибо, что вы с нами. До встречи в чате бота!</p>
+          <div class="controls">
+            <label class="btn ghost" for="step2">Назад</label>
+            <label class="btn" for="step4">Далее</label>
+          </div>
         </div>
-      </div>
 
-      <!-- СЛАЙД 4 -->
-      <div class="slide slide4">
-        <div class="logo">GUARD</div>
-        <h2>work by GUARD</h2>
-        <div class="controls">
-          <label class="btn" for="anti">Анти-армянский</label><br>
-          <label class="btn" for="azart">Азарт</label><br>
-          <label class="btn" for="shop">Шоп</label>
-        </div>
-        <div class="controls">
-          <label class="btn ghost" for="step3">Назад</label>
-        </div>
-      </div>
-
-      <!-- ОКНО АНТИ-АРМЯНСКИЙ -->
-      <div class="slide anti">
-        <h2>work by GUARD</h2>
-        <ul>
-          <li>андастирак - 4к</li>
-          <li>ардар датавор - 12к</li>
-          <li>аргишт апер - 18к</li>
-          <li>позорище - 31к</li>
-          <li>хай-слив - 2к</li>
-          <li>азгаин - 700</li>
-          <li>хайкакан сливнер - 3,5к</li>
-          <li>армед - 1,7к</li>
-          <li>нате приват - 1,9к</li>
-          <li>немесис - 1,8к</li>
-          <li>корданзвац - 200</li>
-          <li>ереванян кянк - 9,1к</li>
-          <li>эск ереван - 40к</li>
-          <li>хандипум ереван - 17к</li>
-          <li>ере 21+ - 7,3к</li>
-        </ul>
-        <div class="controls">
-          <label class="btn ghost" for="step4">Назад</label>
-        </div>
-      </div>
-
-      <!-- ОКНО АЗАРТ -->
-      <div class="slide azart">
-        <h2>work by GUARD</h2>
-        <ul>
-          <li>тото-гаминг - 11к</li>
-          <li>аджарабет - 14к</li>
-        </ul>
-        <div class="controls">
-          <label class="btn ghost" for="step4">Назад</label>
-        </div>
-      </div>
-
-      <!-- ОКНО ШОП -->
-      <div class="slide shop">
-        <h2>work by GUARD</h2>
-        <ul>
-          <li>сев шука - 11,3к</li>
-          <li>кристал ам - 4,5к</li>
-        </ul>
-        <div class="controls">
-          <label class="btn ghost" for="step4">Назад</label>
+        <!-- СЛАЙД 4 -->
+        <div class="slide slide4">
+          <h2>Work by GUARD</h2>
+          <div class="controls">
+            <div class="btn" onclick="openModal('anti')">Анти-армянский</div>
+            <div class="btn" onclick="openModal('azart')">Азарт</div>
+            <div class="btn" onclick="openModal('shop')">Шоп</div>
+            <label class="btn ghost" for="step3">Назад</label>
+          </div>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- МОДАЛКИ -->
+  <div id="modal-anti" class="modal">
+    <div class="modal-content">
+      <h3>Work by GUARD</h3>
+      <p>андастирак - 4к<br>
+      ардар датавор - 12к<br>
+      аргишт апер - 18к<br>
+      позорище - 31к<br>
+      хай-слив - 2к<br>
+      азгаин - 700<br>
+      хайкакан сливнер - 3,5к<br>
+      армед - 1,7к<br>
+      нате приват - 1,9к<br>
+      немесис - 1,8к<br>
+      корданзвац - 200<br>
+      ереванян кянк - 9,1к<br>
+      еск ереван - 40к<br>
+      хандипум ереван - 17к<br>
+      ере 21+ - 7,3к</p>
+      <button onclick="closeModal('anti')">Назад</button>
+    </div>
+  </div>
+
+  <div id="modal-azart" class="modal">
+    <div class="modal-content">
+      <h3>Work by GUARD</h3>
+      <p>тото-гаминг - 11к<br>
+      аджарабет - 14к</p>
+      <button onclick="closeModal('azart')">Назад</button>
+    </div>
+  </div>
+
+  <div id="modal-shop" class="modal">
+    <div class="modal-content">
+      <h3>Work by GUARD</h3>
+      <p>сев шука - 11,3к<br>
+      кристал ам - 4,5к</p>
+      <button onclick="closeModal('shop')">Назад</button>
+    </div>
+  </div>
+
+  <script>
+    function openModal(name) {
+      document.getElementById('modal-' + name).style.display = 'block';
+    }
+    function closeModal(name) {
+      document.getElementById('modal-' + name).style.display = 'none';
+    }
+  </script>
 </body>
 </html>
