@@ -3,53 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Наша компания – краткое описание для Google">
-  <title>Наша компания</title>
+  <title>GUARD</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      color: white;
+      background: url('70B908A0-67CE-4EC9-8381-B560F4592286.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+    }
+
+    .slide {
+      display: none;
       height: 100vh;
-    }
-    .modal {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background: #222;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 400px;
+      width: 100%;
       text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      padding: 40px 20px;
+      box-sizing: border-box;
     }
-    .close {
-      position: absolute;
-      top: 10px; right: 20px;
-      font-size: 20px;
-      cursor: pointer;
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    #step1:checked ~ .slides .slide1,
+    #step2:checked ~ .slides .slide2,
+    #step3:checked ~ .slides .slide3,
+    #step4:checked ~ .slides .slide4,
+    #anti:checked ~ .slides .anti,
+    #azart:checked ~ .slides .azart,
+    #shop:checked ~ .slides .shop {
+      display: block;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    h1, h2 {
+      margin-bottom: 20px;
       color: #fff;
+      text-shadow: 0 0 10px #7d2ae8;
+    }
+
+    .logo {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px #7d2ae8;
+    }
+
+    .controls {
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      margin: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: #7d2ae8;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #a855f7;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    ul li {
+      margin: 6px 0;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span class="close" onclick="document.getElementById('modal').style.display='none'">&times;</span>
-      <h2>Наша компания</h2>
-      <p>Мы предоставляем услуги ... (тут твой текст)</p>
-      <p>Контакты: info@company.com</p>
-    </div>
-  </div>
+  <!-- Радиокнопки для переключения -->
+  <input type="radio" id="step1" name="slider" checked>
+  <input type="radio" id="step2" name="slider">
+  <input type="radio" id="step3" name="slider">
+  <input type="radio" id="step4" name="slider">
+
+  <input type="radio" id="anti" name="slider">
+  <input type="radio" id="azart" name="slider">
+  <input type="radio" id="shop" name="slider">
+
+  <main>
+    <section class="slides">
+      <!-- СЛАЙД 1 -->
+      <div class="slide slide1">
+        <div class="logo">GUARD</div>
+        <h1>Добро пожаловать</h1>
+        <p>Нажмите «Далее», чтобы открыть приветствие и подробности.</p>
+        <div class="controls">
+          <label class="btn" for="step2">Далее</label>
+        </div>
+      </div>
+
+      <!-- СЛАЙД 2 -->
+      <div class="slide slide2">
+        <div class="logo">GUARD</div>
+        <h2>Вас приветствует команда GUARD</h2>
+        <p>Мы рады вас заново видеть в наших рядах. Нашему проекту уже <strong>3 года</strong>. За это время мы закрыли множество каналов, негативно влиявших на сегмент, включая те, что были связаны со сливами.</p>
+        <p>Теперь пришло время передать вам знания, благодаря которым вы станете частью нашей команды. Для этого напишите нашему боту:
+          <a href="https://t.me/guardbnbot" target="_blank">t.me/guardbnbot</a>
+        </p>
+        <div class="controls">
+          <label class="btn ghost" for="step1">Назад</label>
+          <label class="btn" for="step3">Далее</label>
+        </div>
+      </div>
+
+      <!-- СЛАЙД 3 -->
+      <div class="slide slide3">
+        <div class="logo">GUARD</div>
+        <h2>С радостью, команда GUARD</h2>
+        <p>Спасибо, что вы с нами. До встречи в чате бота!</p>
+        <div class="controls">
+          <label class="btn ghost" for="step2">Назад</label>
+          <a class="btn" href="https://t.me/guardbnbot" target="_blank">Написать боту</a>
+          <label class="btn" for="step4">Далее</label>
+        </div>
+      </div>
+
+      <!-- СЛАЙД 4 -->
+      <div class="slide slide4">
+        <div class="logo">GUARD</div>
+        <h2>work by GUARD</h2>
+        <div class="controls">
+          <label class="btn" for="anti">Анти-армянский</label><br>
+          <label class="btn" for="azart">Азарт</label><br>
+          <label class="btn" for="shop">Шоп</label>
+        </div>
+        <div class="controls">
+          <label class="btn ghost" for="step3">Назад</label>
+        </div>
+      </div>
+
+      <!-- ОКНО АНТИ-АРМЯНСКИЙ -->
+      <div class="slide anti">
+        <h2>work by GUARD</h2>
+        <ul>
+          <li>андастирак - 4к</li>
+          <li>ардар датавор - 12к</li>
+          <li>аргишт апер - 18к</li>
+          <li>позорище - 31к</li>
+          <li>хай-слив - 2к</li>
+          <li>азгаин - 700</li>
+          <li>хайкакан сливнер - 3,5к</li>
+          <li>армед - 1,7к</li>
+          <li>нате приват - 1,9к</li>
+          <li>немесис - 1,8к</li>
+          <li>корданзвац - 200</li>
+          <li>ереванян кянк - 9,1к</li>
+          <li>эск ереван - 40к</li>
+          <li>хандипум ереван - 17к</li>
+          <li>ере 21+ - 7,3к</li>
+        </ul>
+        <div class="controls">
+          <label class="btn ghost" for="step4">Назад</label>
+        </div>
+      </div>
+
+      <!-- ОКНО АЗАРТ -->
+      <div class="slide azart">
+        <h2>work by GUARD</h2>
+        <ul>
+          <li>тото-гаминг - 11к</li>
+          <li>аджарабет - 14к</li>
+        </ul>
+        <div class="controls">
+          <label class="btn ghost" for="step4">Назад</label>
+        </div>
+      </div>
+
+      <!-- ОКНО ШОП -->
+      <div class="slide shop">
+        <h2>work by GUARD</h2>
+        <ul>
+          <li>сев шука - 11,3к</li>
+          <li>кристал ам - 4,5к</li>
+        </ul>
+        <div class="controls">
+          <label class="btn ghost" for="step4">Назад</label>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
